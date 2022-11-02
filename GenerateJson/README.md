@@ -15,7 +15,7 @@ Required option 'n, number' is missing.
 
 -n, --number    Required. Number of items to generate.
 
--i, --ident     Indent the generated JSON. Default is 'false'.
+-i, --indent     Indent the generated JSON. Default is 'false'.
 
 --help          Display this help screen.
 

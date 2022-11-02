@@ -1,10 +1,19 @@
-﻿using CommandLine;
+﻿using System.Diagnostics;
+using CommandLine;
 using GenerateJson;
 
-Parser.Default.ParseArguments<Options>(args)
+await Parser.Default.ParseArguments<Options>(args)
     .WithParsedAsync(async options =>
     {
-        var generator = new JsonGenerator();
+        var sw = new Stopwatch();
+        sw.Start();
+        
+        IGenerator generator = new NewtonsoftJsonGenerator();
+        //IGenerator generator = new SystemJsonTextGenerator();
+       
         await generator.Generate(options);
-        Console.WriteLine($"Generated {options.Number} items to {options.Output}");
+
+        sw.Stop();
+        
+        Console.WriteLine($"Generated {options.Number} items to {options.Output} in {sw.Elapsed.TotalSeconds} seconds.");
     });

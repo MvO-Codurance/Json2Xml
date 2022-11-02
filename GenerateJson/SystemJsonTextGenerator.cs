@@ -3,7 +3,7 @@ using Bogus;
 
 namespace GenerateJson;
 
-public class JsonGenerator
+public class SystemJsonTextGenerator : IGenerator
 {
     public async Task Generate(Options options)
     {
@@ -11,7 +11,7 @@ public class JsonGenerator
         
         await using var stream = File.OpenWrite(options.Output);
         await using var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = options.Indent });
-
+    
         writer.WriteStartArray();
         
         for (var index = 0; index < options.Number; index++)
@@ -21,7 +21,7 @@ public class JsonGenerator
                 f.Name.LastName(),
                 f.Date.Past().Date,
                 f.Address.Country());
-
+    
             JsonSerializer.Serialize(writer, p);
         }
         
