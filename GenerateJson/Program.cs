@@ -9,7 +9,7 @@ await Parser.Default.ParseArguments<Options>(args)
         sw.Start();
         
         IGenerator generator = new NewtonsoftJsonGenerator();
-        //IGenerator generator = new SystemJsonTextGenerator();
+        //IGenerator generator = new SystemTextJsonGenerator();
        
         await generator.Generate(options);
 

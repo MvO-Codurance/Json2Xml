@@ -3,7 +3,7 @@ using Bogus;
 
 namespace GenerateJson;
 
-public class SystemJsonTextGenerator : IGenerator
+public class SystemTextJsonGenerator : IGenerator
 {
     public async Task Generate(Options options)
     {
