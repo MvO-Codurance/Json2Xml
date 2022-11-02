@@ -1,0 +1,1 @@
+dotnet run --configuration Release --output "C:\Temp\output.json" --number 1000000
