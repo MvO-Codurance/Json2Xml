@@ -1,5 +1,5 @@
 # Generate JSON
-Simple tool to generate a JSON file containing an arbitrary number of serialised items.
+Simple tool to efficiently generate a JSON file containing an arbitrary number of serialised items.
 
 ## Example Execution
 ```

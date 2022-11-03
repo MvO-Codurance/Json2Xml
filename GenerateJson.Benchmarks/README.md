@@ -47,7 +47,7 @@ BenchmarkDotNet=v0.13.2, OS=Windows 11 (10.0.22000.1165/21H2)
 NOTE: STJ doesn't offer async methods on it's writer.
 
 ## Summary:
-- Using a writer directly beats serialisation in term sof time and allocations
+- Using a writer directly beats serialisation in terms of time and allocations
 - Sync beats async
   - Whilst both Newtonsoft and STJ offer some async methods (Newtonsoft has more and STJ doesn't offer any on the writer) these are just wrappers around the sync method, hence they are just an overhead.
  - Newtonsoft beats STJ
