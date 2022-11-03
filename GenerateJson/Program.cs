@@ -9,8 +9,6 @@ Parser.Default.ParseArguments<Options>(args)
         sw.Start();
         
         var generator = new NewtonsoftJsonGenerator();
-        //var generator = new SystemTextJsonGenerator();
-       
         generator.GenerateViaSerialisation(options);
         //generator.GenerateViaWriter(options);
 
