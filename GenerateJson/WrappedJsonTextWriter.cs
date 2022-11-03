@@ -5,6 +5,7 @@ namespace GenerateJson;
 
 public class WrappedJsonTextWriter : IDisposable
 {
+    private FileStream? _fileStream = null;
     private ZipArchive? _archive = null;
     private Stream? _jsonFileEntryStream = null;
     private StreamWriter? _streamWriter = null;
@@ -14,18 +15,18 @@ public class WrappedJsonTextWriter : IDisposable
     public static WrappedJsonTextWriter Create(string outputPath, bool zipped, bool indent)
     {
         var wrapper = new WrappedJsonTextWriter();
-        var fileStream = File.Open(outputPath, FileMode.Create, FileAccess.Write);
+        wrapper._fileStream = File.Open(outputPath, FileMode.Create, FileAccess.Write);
         
         if (zipped)
         {
-            wrapper._archive = new ZipArchive(fileStream, ZipArchiveMode.Create);
+            wrapper._archive = new ZipArchive(wrapper._fileStream, ZipArchiveMode.Create);
             var jsonFileEntry = wrapper._archive.CreateEntry(Path.GetFileNameWithoutExtension(outputPath) + ".json");
             wrapper._jsonFileEntryStream = jsonFileEntry.Open();
             wrapper._streamWriter = new StreamWriter(wrapper._jsonFileEntryStream);
         }
         else
         {
-            wrapper._streamWriter = new StreamWriter(fileStream);   
+            wrapper._streamWriter = new StreamWriter(wrapper._fileStream);   
         }
         wrapper.Writer = new JsonTextWriter(wrapper._streamWriter);
         if (indent)
@@ -49,5 +50,6 @@ public class WrappedJsonTextWriter : IDisposable
         _streamWriter?.Dispose();
         _jsonFileEntryStream?.Dispose();
         _archive?.Dispose();
+        _fileStream?.Close();
     }
 }
