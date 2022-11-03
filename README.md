@@ -1,5 +1,11 @@
 # Json2Xml
 
+Tools to efficiently:
+ - generate JSON files
+ - convert JSON files to XML
+
+The tools support generating/converting very large files by streaming input and output and thus keeping memory usage small and consistent. 
+
 ## References
  - https://stackoverflow.com/questions/56260418/how-to-convert-from-huge-json-file-to-xml-file-in-c-sharp
  - https://stackoverflow.com/questions/39955399/out-of-memory-exception-while-loading-large-json-file-from-disk

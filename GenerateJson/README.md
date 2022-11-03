@@ -1,5 +1,6 @@
 # Generate JSON
 Simple tool to efficiently generate (and optionally zip) a JSON file containing an arbitrary number of serialised items.
+Supports the generation of very large files by streaming the output, thus keeping the memory usage small and consistent.
 
 ## Example Execution
 ```

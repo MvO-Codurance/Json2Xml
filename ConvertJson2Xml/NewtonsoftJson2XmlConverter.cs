@@ -1,6 +1,5 @@
 using System.Xml;
 using System.Xml.Linq;
-using Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -20,11 +19,11 @@ public class NewtonsoftJson2XmlConverter
         var serialiser = new JsonSerializer();
         var xmlNodeConverter = new XmlNodeConverter
         {
-            DeserializeRootElementName = nameof(Person)
+            DeserializeRootElementName = options.RootElementName
         };
 
         await xmlWriter.WriteStartDocumentAsync();
-        await xmlWriter.WriteStartElementAsync(null, "People", null);
+        await xmlWriter.WriteStartElementAsync(null, options.ElementName, null);
         
         while (await reader.ReadAsync())
         {

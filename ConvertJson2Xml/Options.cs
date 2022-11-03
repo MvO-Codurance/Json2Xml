@@ -16,4 +16,16 @@ public class Options
     // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public string Output { get; set; }
 #pragma warning restore CS8618
+    
+    [Option('r', "rootElementName", Required = true, HelpText = "Name of the root XML element.")]
+#pragma warning disable CS8618
+    // ReSharper disable once UnusedAutoPropertyAccessor.Global
+    public string RootElementName { get; set; }
+#pragma warning restore CS8618
+    
+    [Option('e', "elementName", Required = true, HelpText = "Name of the item XML element.")]
+#pragma warning disable CS8618
+    // ReSharper disable once UnusedAutoPropertyAccessor.Global
+    public string ElementName { get; set; }
+#pragma warning restore CS8618
 }
