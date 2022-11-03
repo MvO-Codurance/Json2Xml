@@ -18,4 +18,8 @@ public class Options
     [Option('i', "indent", Required = false, HelpText = "Indent the generated JSON.", Default = false)]
     // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public bool Indent { get; set; }
+    
+    [Option('z', "zip", Required = false, HelpText = "Zip the generated JSON file.", Default = false)]
+    // ReSharper disable once UnusedAutoPropertyAccessor.Global
+    public bool Zip { get; set; }
 }
