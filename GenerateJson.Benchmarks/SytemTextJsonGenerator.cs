@@ -1,27 +1,28 @@
+using System.IO;
 using System.Text.Json;
 using Bogus;
 
-namespace GenerateJson;
+namespace GenerateJson.Benchmarks;
 
 public class SystemTextJsonGenerator
 {
-    public void GenerateViaSerialisation(Options options)
+    public void Generate_Serialise(string outputPath, int numberOfItems)
     {
         var f = new Faker();
         
-        using var stream = File.Open(options.Output, FileMode.Create, FileAccess.Write);
-        using var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = options.Indent });
-        
+        using var stream = File.OpenWrite(outputPath);
+        using var writer = new Utf8JsonWriter(stream);
+    
         writer.WriteStartArray();
         
-        for (var index = 0; index < options.Number; index++)
+        for (var index = 0; index < numberOfItems; index++)
         {
             var p = new Person(
                 f.Name.FirstName(),
                 f.Name.LastName(),
                 f.Date.Past().Date,
                 f.Address.Country());
-
+    
             JsonSerializer.Serialize(writer, p);
         }
         
@@ -29,16 +30,16 @@ public class SystemTextJsonGenerator
         writer.Flush();
     }
     
-    public void GenerateViaWriter(Options options)
+    public void Generate_Utf8JsonWriterSync(string outputPath, int numberOfItems)
     {
         var f = new Faker();
-                
-        using var stream = File.Open(options.Output, FileMode.Create, FileAccess.Write);
-        using var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = options.Indent });
+        
+        using var stream = File.OpenWrite(outputPath);
+        using var writer = new Utf8JsonWriter(stream);
         
         writer.WriteStartArray();
         
-        for (var index = 0; index < options.Number; index++)
+        for (var index = 0; index < numberOfItems; index++)
         {
             writer.WriteStartObject();
             

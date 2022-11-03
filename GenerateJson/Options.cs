@@ -15,7 +15,7 @@ public class Options
     // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public int Number { get; set; }
     
-    [Option('i', "indent", Required = false, HelpText = "Indent the generated JSON. Default is 'false'.")]
+    [Option('i', "indent", Required = false, HelpText = "Indent the generated JSON.", Default = false)]
     // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public bool Indent { get; set; }
 }

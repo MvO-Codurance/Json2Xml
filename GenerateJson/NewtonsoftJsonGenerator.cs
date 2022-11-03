@@ -3,15 +3,14 @@ using Newtonsoft.Json;
 
 namespace GenerateJson;
 
-public class NewtonsoftJsonGenerator : IGenerator
+public class NewtonsoftJsonGenerator
 {
-    public async Task Generate(Options options)
+    public void GenerateViaSerialisation(Options options)
     {
         var f = new Faker();
         var serialiser = JsonSerializer.Create();
         
-        await using var streamWriter = new StreamWriter(options.Output);
-        
+        using var streamWriter = new StreamWriter(options.Output);
         using var jsonWriter = new JsonTextWriter(streamWriter);
         jsonWriter.CloseOutput = true;
         if (options.Indent)
@@ -19,7 +18,7 @@ public class NewtonsoftJsonGenerator : IGenerator
             jsonWriter.Formatting = Formatting.Indented;
         }
 
-        await jsonWriter.WriteStartArrayAsync();
+        jsonWriter.WriteStartArray();
         
         for (var index = 0; index < options.Number; index++)
         {
@@ -32,7 +31,44 @@ public class NewtonsoftJsonGenerator : IGenerator
             serialiser.Serialize(jsonWriter, p);
         }
         
-        await jsonWriter.WriteEndArrayAsync();
-        await jsonWriter.FlushAsync();
+        jsonWriter.WriteEndArray();
+        jsonWriter.Flush();
+    }
+    
+    public void GenerateViaWriter(Options options)
+    {
+        var f = new Faker();
+        
+        using var streamWriter = new StreamWriter(options.Output);
+        using var jsonWriter = new JsonTextWriter(streamWriter);
+        jsonWriter.CloseOutput = true;
+        if (options.Indent)
+        {
+            jsonWriter.Formatting = Formatting.Indented;
+        }
+
+        jsonWriter.WriteStartArray();
+        
+        for (var index = 0; index < options.Number; index++)
+        {
+            jsonWriter.WriteStartObject();
+            
+            jsonWriter.WritePropertyName("FirstName");
+            jsonWriter.WriteValue(f.Name.FirstName());
+            
+            jsonWriter.WritePropertyName("LastName");
+            jsonWriter.WriteValue(f.Name.LastName());
+            
+            jsonWriter.WritePropertyName("DateOfBirth");
+            jsonWriter.WriteValue(f.Date.Past().Date);
+            
+            jsonWriter.WritePropertyName("Nationality");
+            jsonWriter.WriteValue(f.Address.Country());
+            
+            jsonWriter.WriteEndObject();
+        }
+        
+        jsonWriter.WriteEndArray();
+        jsonWriter.Flush();
     }
 }

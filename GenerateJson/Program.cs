@@ -2,18 +2,21 @@
 using CommandLine;
 using GenerateJson;
 
-await Parser.Default.ParseArguments<Options>(args)
-    .WithParsedAsync(async options =>
+Parser.Default.ParseArguments<Options>(args)
+    .WithParsedAsync(options =>
     {
         var sw = new Stopwatch();
         sw.Start();
         
-        IGenerator generator = new NewtonsoftJsonGenerator();
-        //IGenerator generator = new SystemTextJsonGenerator();
+        var generator = new NewtonsoftJsonGenerator();
+        //var generator = new SystemTextJsonGenerator();
        
-        await generator.Generate(options);
+        generator.GenerateViaSerialisation(options);
+        //generator.GenerateViaWriter(options);
 
         sw.Stop();
         
         Console.WriteLine($"Generated {options.Number} items to {options.Output} in {sw.Elapsed.TotalSeconds} seconds.");
+
+        return null;
     });

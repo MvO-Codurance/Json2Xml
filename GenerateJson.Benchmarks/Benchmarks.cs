@@ -12,7 +12,7 @@ namespace GenerateJson.Benchmarks;
 [RankColumn]
 public class Benchmarks
 {
-    [Params(10_000, 100_000, 1_000_000, 2_000_000)]
+    [Params(100_000, 500_000, 1_000_000)]
     public int NumberOfItems { get; set; }
     
     [GlobalSetup]
@@ -23,28 +23,38 @@ public class Benchmarks
     }
     
     [Benchmark(Baseline = true)]
-    public async Task Newtonsoft()
+    public void Newtonsoft_Serialise()
     {
         var generator = new NewtonsoftJsonGenerator();
-        var options = GetGeneratorOptions<NewtonsoftJsonGenerator>();
-        await generator.Generate(options);
+        generator.Generate_Serialise(GetOutputPath<NewtonsoftJsonGenerator>(), NumberOfItems);
+    }
+    
+    [Benchmark]
+    public async Task Newtonsoft_Writer_Async()
+    {
+        var generator = new NewtonsoftJsonGenerator();
+        await generator.Generate_JsonTextWriterAsync(GetOutputPath<NewtonsoftJsonGenerator>(), NumberOfItems);
+    }
+    
+    [Benchmark]
+    public void Newtonsoft_Writer_Sync()
+    {
+        var generator = new NewtonsoftJsonGenerator();
+        generator.Generate_JsonTextWriterSync(GetOutputPath<NewtonsoftJsonGenerator>(), NumberOfItems);
     }
 
     [Benchmark]
-    public async Task SystemTextJson()
+    public void SystemTextJson_Serialise()
     {
         var generator = new SystemTextJsonGenerator();
-        var options = GetGeneratorOptions<SystemTextJsonGenerator>();
-        await generator.Generate(options);
+        generator.Generate_Serialise(GetOutputPath<SystemTextJsonGenerator>(), NumberOfItems);
     }
-
-    private Options GetGeneratorOptions<T>()
+    
+    [Benchmark]
+    public void SystemTextJson_Writer_Sync()
     {
-        return new Options
-        {
-            Output = GetOutputPath<T>(),
-            Number = NumberOfItems
-        };
+        var generator = new SystemTextJsonGenerator();
+        generator.Generate_Utf8JsonWriterSync(GetOutputPath<SystemTextJsonGenerator>(), NumberOfItems);
     }
 
     private string GetOutputPath<T>()
