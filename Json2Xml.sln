@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateJson", "GenerateJso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateJson.Benchmarks", "GenerateJson.Benchmarks\GenerateJson.Benchmarks.csproj", "{F6F1A1A8-8820-4DF6-87BF-50406720C4D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConvertJson2Xml", "ConvertJson2Xml\ConvertJson2Xml.csproj", "{40E994CD-4B84-4AE2-BDB1-5D7738A526E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{AE34C0A9-A76A-493A-99BB-04EEA4DC14F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{F6F1A1A8-8820-4DF6-87BF-50406720C4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6F1A1A8-8820-4DF6-87BF-50406720C4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6F1A1A8-8820-4DF6-87BF-50406720C4D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E994CD-4B84-4AE2-BDB1-5D7738A526E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E994CD-4B84-4AE2-BDB1-5D7738A526E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E994CD-4B84-4AE2-BDB1-5D7738A526E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E994CD-4B84-4AE2-BDB1-5D7738A526E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE34C0A9-A76A-493A-99BB-04EEA4DC14F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE34C0A9-A76A-493A-99BB-04EEA4DC14F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE34C0A9-A76A-493A-99BB-04EEA4DC14F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE34C0A9-A76A-493A-99BB-04EEA4DC14F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
