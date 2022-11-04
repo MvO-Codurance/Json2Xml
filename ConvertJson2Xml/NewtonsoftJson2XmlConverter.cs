@@ -1,4 +1,3 @@
-using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -10,9 +9,8 @@ public class NewtonsoftJson2XmlConverter
     public async Task ConvertViaSerialisation(Options options)
     {
         using var wrappedJsonReader = WrappedJsonTextReader.Create(options.Input);
-        
-        await using var outputStream = File.Open(options.Output, FileMode.Create, FileAccess.Write);
-        await using var xmlWriter = XmlWriter.Create(outputStream, new XmlWriterSettings { Async = true, Indent = true });
+        using var wrappedXmlWriter = WrappedXmlWriter.Create(options.Output, options.Zip, options.Indent);
+        var xmlWriter = wrappedXmlWriter.Writer;
         
         var serialiser = new JsonSerializer();
         var xmlNodeConverter = new XmlNodeConverter

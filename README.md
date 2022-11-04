@@ -6,6 +6,8 @@ Tools to efficiently:
 
 The tools support generating/converting very large files by streaming input and output and thus keeping memory usage small and consistent. 
 
+NOTE: the tools represent a sample of how to do this and as such they follow the happy-path. Validation and/or error-checking is minimal/absent. 
+
 ## References
  - https://stackoverflow.com/questions/56260418/how-to-convert-from-huge-json-file-to-xml-file-in-c-sharp
  - https://stackoverflow.com/questions/39955399/out-of-memory-exception-while-loading-large-json-file-from-disk

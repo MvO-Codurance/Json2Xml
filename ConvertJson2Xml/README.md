@@ -22,6 +22,10 @@ ConvertJson2Xml.exe --input "C:\Temp\input.json" --output "C:\Temp\output.xml" -
 
   -e, --elementName        Required. Name of the item XML element.
 
+  -i, --indent             (Default: false) Indent the generated XML.
+
+  -z, --zip                (Default: false) Zip the generated XML file.
+
   --help                   Display this help screen.
 
   --version                Display version information.

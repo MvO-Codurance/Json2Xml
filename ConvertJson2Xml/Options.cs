@@ -2,30 +2,31 @@ using CommandLine;
 
 namespace ConvertJson2Xml;
 
+// CS8618: "Non-nullable property 'Input' is uninitialized. Consider declaring the property as nullable."
+#pragma warning disable CS8618
+
 // ReSharper disable once ClassNeverInstantiated.Global
 public class Options
 {
+    // ReSharper disable UnusedAutoPropertyAccessor.Global
+    
     [Option('i', "input", Required = true, HelpText = "Full path to the input JSON file.")]
-#pragma warning disable CS8618
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public string Input { get; set; }
-#pragma warning restore CS8618
     
     [Option('o', "output", Required = true, HelpText = "Full path to the output XML file.")]
-#pragma warning disable CS8618
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public string Output { get; set; }
-#pragma warning restore CS8618
     
     [Option('r', "rootElementName", Required = true, HelpText = "Name of the root XML element.")]
-#pragma warning disable CS8618
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public string RootElementName { get; set; }
-#pragma warning restore CS8618
     
     [Option('e', "elementName", Required = true, HelpText = "Name of the item XML element.")]
-#pragma warning disable CS8618
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
     public string ElementName { get; set; }
-#pragma warning restore CS8618
+    
+    [Option('i', "indent", Required = false, HelpText = "Indent the generated XML.", Default = false)]
+    public bool Indent { get; set; }
+    
+    [Option('z', "zip", Required = false, HelpText = "Zip the generated XML file.", Default = false)]
+    public bool Zip { get; set; }
 }
+
+#pragma warning restore CS8618
