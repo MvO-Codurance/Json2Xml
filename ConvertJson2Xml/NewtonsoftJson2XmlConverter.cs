@@ -9,7 +9,7 @@ public class NewtonsoftJson2XmlConverter
     public async Task ConvertViaSerialisation(Options options)
     {
         using var wrappedJsonReader = WrappedJsonTextReader.Create(options.Input);
-        using var wrappedXmlWriter = WrappedXmlWriter.Create(options.Output, options.Zip, options.Indent);
+        await using var wrappedXmlWriter = WrappedXmlWriter.Create(options.Output, options.Zip, options.Indent);
         var xmlWriter = wrappedXmlWriter.Writer;
         
         var serialiser = new JsonSerializer();

@@ -42,14 +42,22 @@ public class WrappedJsonTextWriter : IDisposable
 #pragma warning restore CS8618
     {
     }
-    
+
     public void Dispose()
     {
-        Writer.Flush();
-        Writer.Close();
-        _streamWriter?.Dispose();
-        _jsonFileEntryStream?.Dispose();
-        _archive?.Dispose();
-        _fileStream?.Close();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            ((IDisposable)Writer).Dispose();
+            _streamWriter?.Dispose();
+            _jsonFileEntryStream?.Dispose();
+            _archive?.Dispose();
+            _fileStream?.Dispose();
+        }
     }
 }

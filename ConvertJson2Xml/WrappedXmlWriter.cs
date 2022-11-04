@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace ConvertJson2Xml;
 
-public class WrappedXmlWriter : IDisposable
+public class WrappedXmlWriter : IDisposable, IAsyncDisposable
 {
     private FileStream? _fileStream = null;
     private ZipArchive? _archive = null;
@@ -39,12 +39,40 @@ public class WrappedXmlWriter : IDisposable
     {
     }
     
+    public async ValueTask DisposeAsync()
+    {
+        await DisposeAsyncCore();
+        GC.SuppressFinalize(this);
+    }
+    
     public void Dispose()
     {
-        Writer.Flush();
-        Writer.Close();
-        _xmlFileStream?.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+    
+    protected virtual async ValueTask DisposeAsyncCore()
+    {
+        await Writer.DisposeAsync();
+        if (_xmlFileStream != null)
+        {
+            await _xmlFileStream.DisposeAsync();   
+        }
         _archive?.Dispose();
-        _fileStream?.Close();
+        if (_fileStream != null)
+        {
+            await _fileStream.DisposeAsync();
+        }
+    }
+    
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            Writer.Dispose();
+            _xmlFileStream?.Dispose();
+            _archive?.Dispose();
+            _fileStream?.Dispose();
+        }
     }
 }

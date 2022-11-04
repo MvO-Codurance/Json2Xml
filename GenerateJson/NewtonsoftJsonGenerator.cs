@@ -30,6 +30,7 @@ public class NewtonsoftJsonGenerator
         }
     
         jsonWriter.WriteEndArray();
+        jsonWriter.Flush();
     }
 
     public void GenerateViaWriter(Options options)

@@ -38,12 +38,21 @@ public class WrappedJsonTextReader : IDisposable
 #pragma warning restore CS8618
     {
     }
-    
+
     public void Dispose()
     {
-        Reader.Close();
-        _streamReader?.Dispose();
-        _archive?.Dispose();
-        _fileStream?.Close();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            ((IDisposable)Reader).Dispose();
+            _streamReader?.Dispose();
+            _archive?.Dispose();
+            _fileStream?.Dispose();
+        }
     }
 }
