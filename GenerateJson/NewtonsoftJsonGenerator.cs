@@ -47,7 +47,7 @@ public class NewtonsoftJsonGenerator
             jsonWriter.WriteStartObject();
             
             jsonWriter.WritePropertyName("@xmlns");
-            jsonWriter.WriteValue(p.XmlNs);
+            jsonWriter.WriteValue(p.XmlNs);                    
         
             jsonWriter.WritePropertyName("FirstName");
             jsonWriter.WriteValue(f.Name.FirstName());
